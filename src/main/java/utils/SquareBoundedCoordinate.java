@@ -24,32 +24,29 @@ public abstract class SquareBoundedCoordinate {
         assert !this.adaptee.isNull();
 
         ConcreteCoordinate concreteCoordinate = (ConcreteCoordinate) this.adaptee;
-        return this.getLimits().isIncluded(concreteCoordinate.getRow())
-                && this.getLimits().isIncluded(concreteCoordinate.getColumn());
+        return this.getLimitsRow().isIncluded(concreteCoordinate.getRow())
+                && this.getLimitsColumn().isIncluded(concreteCoordinate.getColumn());
     }
 
-    protected ClosedInterval getLimits() {
-        return new ClosedInterval(0, this.getDimension() - 1);
+    protected ClosedInterval getLimitsRow() {
+        return new ClosedInterval(0, this.getDimensionRow() - 1);
     }
 
-    protected abstract int getDimension();
+    protected ClosedInterval getLimitsColumn() {
+        return new ClosedInterval(0, this.getDimensionColumn() - 1);
+    }
+
+    protected abstract int getDimensionRow();
+    protected abstract int getDimensionColumn();
 
     public Direction getDirection(SquareBoundedCoordinate coordinate) {
         if (this.equals(coordinate) || this.isNull() || coordinate.isNull()) {
             return Direction.NULL;
         }
-        if (this.inInverseDiagonal() && coordinate.inInverseDiagonal()) {
-            return Direction.INVERSE_DIAGONAL;
-        }
         return this.adaptee.getDirection(coordinate.adaptee);
     }
 
-    public boolean inInverseDiagonal() {
-        ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
-        return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
-    }
-
-    public void read(String message) {
+    /* public void read(String message) {
         assert message != null;
 
         this.adaptee = new ConcreteCoordinate();
@@ -62,14 +59,9 @@ public abstract class SquareBoundedCoordinate {
                 Console.getInstance().writeln(this.getErrorMessage());
             }
         } while (error);
-    }
+    } */
 
     protected abstract String getErrorMessage();
-
-    public void random() {
-        Random random = new Random(System.currentTimeMillis());
-        this.adaptee = new ConcreteCoordinate(random.nextInt(this.getDimension()), random.nextInt(this.getDimension()));
-    }
 
     public int getRow() {
         assert !this.adaptee.isNull();

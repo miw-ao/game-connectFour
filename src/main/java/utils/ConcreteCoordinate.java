@@ -31,8 +31,11 @@ public class ConcreteCoordinate implements Coordinate {
 		if (this.inVertical(coordinate)) {
 			return Direction.VERTICAL;
 		}
-		if (this.inMainDiagonal() && coordinate.inMainDiagonal()) {
+		if (this.inMainDiagonal(coordinate)) {
 			return Direction.MAIN_DIAGONAL;
+		}
+		if (this.inInverseDiagonal(coordinate)) {
+			return Direction.INVERSE_DIAGONAL;
 		}
 		return Direction.NULL;
 	}
@@ -54,16 +57,29 @@ public class ConcreteCoordinate implements Coordinate {
 	}
 
 	@Override
-	public boolean inMainDiagonal() {
-		return this.row - this.column == 0;
+	public boolean inMainDiagonal(Coordinate coordinate) {
+		if (coordinate.isNull()){
+			return false;
+		}
+		return this.row - this.column == ((ConcreteCoordinate) coordinate).row - ((ConcreteCoordinate) coordinate).column;
+		// TODO: Comprobar que mira las casillas diagonales contiguas, no vaya a ser que una este en el 1-1 y otra en el 6-6 y lo considere diagonal
 	}
 
-	protected void read(String title) {
+	@Override
+	public boolean inInverseDiagonal(Coordinate coordinate) {
+		if (coordinate.isNull()){
+			return false;
+		}
+		return this.row + this.column == ((ConcreteCoordinate) coordinate).row + ((ConcreteCoordinate) coordinate).column;
+		// TODO: Comprobar que mira las casillas diagonales contiguas, no vaya a ser que una este en el 1-6 y otra en el 7-1 y lo considere diagonal
+	}
+
+	/* protected void read(String title) {
 		Console console = Console.getInstance();
 		console.writeln(title);
 		this.row = console.readInt(ConcreteCoordinate.ROW) - 1;
 		this.column = console.readInt(ConcreteCoordinate.COLUMN) - 1;
-	}
+	} */
 
 	public int getRow() {
 		return this.row;

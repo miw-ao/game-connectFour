@@ -16,8 +16,13 @@ class Coordinate extends SquareBoundedCoordinate {
     }
 
     @Override
-    protected int getDimension() {
-        return 0;
+    protected int getDimensionRow() {
+        return Coordinate.DIMENSION_ROW;
+    }
+
+    @Override
+    protected int getDimensionColumn() {
+        return Coordinate.DIMENSION_COLUMN;
     }
 
     @Override
