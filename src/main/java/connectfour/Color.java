@@ -26,6 +26,10 @@ enum Color {
         Console.getInstance().write(colorName);
     }
 
+    boolean isNull() {
+        return this == Color.NULL;
+    }
+
     boolean isYellow() {
         return this == Color.YELLOW;
     }

@@ -46,21 +46,6 @@ public abstract class SquareBoundedCoordinate {
         return this.adaptee.getDirection(coordinate.adaptee);
     }
 
-    /* public void read(String message) {
-        assert message != null;
-
-        this.adaptee = new ConcreteCoordinate();
-        ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
-        boolean error;
-        do {
-            coordinate.read(message);
-            error = !this.isValid();
-            if (error) {
-                Console.getInstance().writeln(this.getErrorMessage());
-            }
-        } while (error);
-    } */
-
     protected abstract String getErrorMessage();
 
     public int getRow() {

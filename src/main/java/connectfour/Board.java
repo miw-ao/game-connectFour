@@ -19,10 +19,35 @@ public class Board {
         }
     }
 
+    void putToken(Coordinate coordinate, Color color) {
+        assert !coordinate.isNull();
+
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
+
     private Color getColor(Coordinate coordinate) {
         assert !coordinate.isNull();
 
         return this.colors[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    boolean isValidColumn(int column) {
+        return column >= 0 && column < Coordinate.DIMENSION_COLUMN;
+    }
+
+    int getRemainingColumnSquares(int column) {
+        int remainingColumnSquares = Coordinate.DIMENSION_ROW;
+
+        for (int i = Coordinate.DIMENSION_ROW - 1; i >= 0; i--) {
+            if (this.colors[i][column] != Color.NULL) {
+                remainingColumnSquares--;
+            }
+        }
+        return remainingColumnSquares;
+    }
+
+    boolean isConnectFour(Color color) {
+        return false; // QUitar
     }
 
     void write() {

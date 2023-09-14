@@ -8,6 +8,8 @@ enum Error {
     NOT_OWNER("There is not a token of yours"),
     SAME_COORDINATES("The origin and target squares are the same"),
     WRONG_COORDINATES("The coordinates are wrong"),
+    WRONG_COLUMN("The column is wrong"),
+    FULL_COLUMN("The column is full"),
     NULL;
 
     private String message;
