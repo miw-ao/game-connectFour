@@ -31,12 +31,12 @@ public class ConcreteCoordinate implements Coordinate {
 		if (this.inVertical(coordinate)) {
 			return Direction.VERTICAL;
 		}
-		if (this.inMainDiagonal(coordinate)) {
+		/* if (this.inMainDiagonal(coordinate)) {
 			return Direction.MAIN_DIAGONAL;
 		}
 		if (this.inInverseDiagonal(coordinate)) {
 			return Direction.INVERSE_DIAGONAL;
-		}
+		} */
 		return Direction.NULL;
 	}
 
@@ -45,12 +45,18 @@ public class ConcreteCoordinate implements Coordinate {
 		if (coordinate.isNull()){
 			return false;
 		}
+		if ((this.column != ((ConcreteCoordinate) coordinate).column + 1) && (this.column != ((ConcreteCoordinate) coordinate).column - 1)){
+			return false;
+		}
 		return this.row == ((ConcreteCoordinate) coordinate).row;
 	}
 
 	@Override
 	public boolean inVertical(Coordinate coordinate) {
 		if (coordinate.isNull()){
+			return false;
+		}
+		if ((this.row != ((ConcreteCoordinate) coordinate).row + 1) && (this.row != ((ConcreteCoordinate) coordinate).row - 1)){
 			return false;
 		}
 		return this.column == ((ConcreteCoordinate) coordinate).column;

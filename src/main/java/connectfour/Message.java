@@ -4,9 +4,9 @@ import utils.Console;
 
 enum Message {
     TITLE("--- CONNECT FOUR ---"),
-    HORIZONTAL_LINE("---------------"),
+    HORIZONTAL_LINE("-------------------------------"),
     VERTICAL_LINE(" | "),
-    ENTER_COLUMN_TO_PUT("Enter a column to put a token: "),
+    ENTER_COLUMN_TO_PUT("[#color] Enter a column to put a token: "),
     PLAYER_WIN("#player player: You win!!! :-)"),
     RESUME("Do you want to continue");
 
@@ -24,10 +24,16 @@ enum Message {
         Console.getInstance().writeln(this.message);
     }
 
-    void writeln(String player) {
+    void writelnWin(String player) {
         assert this == Message.PLAYER_WIN;
 
         Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
+    }
+
+    String messagePlayerColor(Color color) {
+        assert this == Message.ENTER_COLUMN_TO_PUT;
+
+        return this.message.replaceAll("#color", "" + color.name());
     }
 
     @Override

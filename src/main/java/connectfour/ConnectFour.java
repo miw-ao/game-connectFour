@@ -29,8 +29,7 @@ public class ConnectFour {
     }
 
     private boolean isConnectFour() {
-        return false; // QUitar
-        // TODO: isConnectFOur en Board: return this.board.isConnectFour(this.turn.getActiveColor());
+        return this.board.isConnectFour(this.turn.getActiveColor());
     }
 
     private boolean isResumedGame() {
@@ -44,6 +43,6 @@ public class ConnectFour {
     }
 
     public static void main(String[] args) {
-        new ConnectFour().playGame();
+        new ConnectFour().play();
     }
 }

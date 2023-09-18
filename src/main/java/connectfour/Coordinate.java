@@ -25,9 +25,4 @@ class Coordinate extends SquareBoundedCoordinate {
         return Coordinate.DIMENSION_COLUMN;
     }
 
-    @Override
-    protected String getErrorMessage() {
-        return Error.WRONG_COORDINATES.toString();
-    }
-
 }

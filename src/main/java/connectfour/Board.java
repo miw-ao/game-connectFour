@@ -1,6 +1,10 @@
 package connectfour;
 
 import utils.Console;
+import utils.Direction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
 
@@ -47,7 +51,49 @@ public class Board {
     }
 
     boolean isConnectFour(Color color) {
-        return false; // QUitar
+        assert !color.isNull();
+        final int connectFour = 4;
+
+        List<Direction> directions = this.getDirections(color);
+        if (directions.size() < connectFour - 1) {
+            return false;
+        }
+        for (int i = 0; i < directions.size() - 2; i++) {
+            if(directions.get(i).isNull()){
+                continue;
+            }
+            if (directions.get(i).equals(directions.get(i + 1)) && directions.get(i).equals(directions.get(i + 2))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<Direction> getDirections(Color color) {
+        assert !color.isNull();
+
+        List<Direction> directions = new ArrayList<>();
+        List<Coordinate> coordinates = this.getCoordinates(color);
+        if(!coordinates.isEmpty()){
+            for (int i = 0; i < coordinates.size() - 1; i++) {
+                directions.add(coordinates.get(i).getDirection(coordinates.get(i + 1)));
+            }
+        }
+        return directions;
+    }
+
+    List<Coordinate> getCoordinates(Color color) {
+        assert !color.isNull();
+
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < Coordinate.DIMENSION_ROW; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION_COLUMN; j++) {
+                if (this.getColor(new Coordinate(i,j)) == color) {
+                    coordinates.add(new Coordinate(i, j));
+                }
+            }
+        }
+        return coordinates;
     }
 
     void write() {

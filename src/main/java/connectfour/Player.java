@@ -39,7 +39,7 @@ class Player {
         Console console = Console.getInstance();
         boolean error;
         do {
-            column = console.readInt(Message.ENTER_COLUMN_TO_PUT.toString()) - 1;
+            column = console.readInt(Message.ENTER_COLUMN_TO_PUT.messagePlayerColor(this.color)) - 1;
             error = !this.board.isValidColumn(column);
             if (error) {
                 Error.WRONG_COLUMN.writeln();
@@ -49,7 +49,7 @@ class Player {
     }
 
     void writeWinner() {
-        Message.PLAYER_WIN.writeln(this.color.name());
+        Message.PLAYER_WIN.writelnWin(this.color.name());
     }
 
     Color getColor() {
