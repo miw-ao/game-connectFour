@@ -4,41 +4,41 @@ import utils.Console;
 
 public class Board {
 
+    public static final int DIMENSION_ROW = 6;
+    public static final int DIMENSION_COLUMN = 7;
     private final Color[][] colors;
 
     Board() {
-        this.colors = new Color[Coordinate.DIMENSION_ROW][Coordinate.DIMENSION_COLUMN];
+        this.colors = new Color[DIMENSION_ROW][DIMENSION_COLUMN];
         this.reset();
     }
 
     void reset() {
-        for (int i = 0; i < Coordinate.DIMENSION_ROW; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION_COLUMN; j++) {
+        for (int i = 0; i < DIMENSION_ROW; i++) {
+            for (int j = 0; j < DIMENSION_COLUMN; j++) {
                 this.colors[i][j] = Color.NULL;
             }
         }
     }
 
     void putToken(Coordinate coordinate, Color color) {
-        assert !coordinate.isNull();
 
-        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+        this.colors[coordinate.row()][coordinate.column()] = color;
     }
 
     private Color getColor(Coordinate coordinate) {
-        assert !coordinate.isNull();
 
-        return this.colors[coordinate.getRow()][coordinate.getColumn()];
+        return this.colors[coordinate.row()][coordinate.column()];
     }
 
     boolean isValidColumn(int column) {
-        return column >= 0 && column < Coordinate.DIMENSION_COLUMN;
+        return column >= 0 && column < DIMENSION_COLUMN;
     }
 
     int getRemainingColumnSquares(int column) {
-        int remainingColumnSquares = Coordinate.DIMENSION_ROW;
+        int remainingColumnSquares = DIMENSION_ROW;
 
-        for (int i = Coordinate.DIMENSION_ROW - 1; i >= 0; i--) {
+        for (int i = DIMENSION_ROW - 1; i >= 0; i--) {
             if (this.colors[i][column] != Color.NULL) {
                 remainingColumnSquares--;
             }
@@ -134,9 +134,9 @@ public class Board {
 
     void write() {
         Message.HORIZONTAL_LINE.writeln();
-        for (int i = 0; i < Coordinate.DIMENSION_ROW; i++) {
+        for (int i = 0; i < DIMENSION_ROW; i++) {
             Message.VERTICAL_LINE.write();
-            for (int j = 0; j < Coordinate.DIMENSION_COLUMN; j++) {
+            for (int j = 0; j < DIMENSION_COLUMN; j++) {
                 this.getColor(new Coordinate(i, j)).write();
                 Message.VERTICAL_LINE.write();
             }

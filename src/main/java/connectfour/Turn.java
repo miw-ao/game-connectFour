@@ -1,12 +1,10 @@
 package connectfour;
 
-import java.util.List;
-
 public class Turn {
 
-    private Board board;
+    private final Board board;
     static final int NUMBER_PLAYERS = 2;
-    private Player[] players;
+    private final Player[] players;
     private int activePlayer;
 
     Turn(Board board) {
@@ -39,10 +37,7 @@ public class Turn {
     }
 
     boolean isTied(){
-        if (this.players[0].getPutTokens() + this.players[1].getPutTokens() == Coordinate.DIMENSION_ROW * Coordinate.DIMENSION_COLUMN){
-            return true;
-        }
-        return false;
+        return this.players[0].getPutTokens() + this.players[1].getPutTokens() == Board.DIMENSION_ROW * Board.DIMENSION_COLUMN;
     }
 
 }

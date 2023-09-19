@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 
 public class Console {
 
-	private static Console instance = new Console();
+	private static final Console instance = new Console();
 	
 	public static Console getInstance() {
 		return instance;
 	}
 	
-	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public String readString(String title) {
 		String input = null;
@@ -21,10 +21,6 @@ public class Console {
 		} catch (Exception ex) {
 		}
 		return input;
-	}
-
-	public String readString() {
-		return this.readString("");
 	}
 
 	public int readInt(String title) {
@@ -41,31 +37,8 @@ public class Console {
 		return input;
 	}
 
-	public char readChar(String title) {
-		char charValue = ' ';
-		boolean ok = false;
-		do {
-			String input = this.readString(title);
-			if (input.length() != 1) {
-				this.writeError("character");
-			} else {
-				charValue = input.charAt(0);
-				ok = true;
-			}
-		} while (!ok);
-		return charValue;
-	}
-
 	public void write(String string) {
 		System.out.print(string);
-	}
-
-	public void write(int integer) {
-		System.out.print(integer);
-	}
-
-	public void write(char character) {
-		System.out.print(character);
 	}
 
 	public void writeln() {
@@ -74,11 +47,6 @@ public class Console {
 
 	public void writeln(String string) {
 		this.write(string);
-		this.writeln();
-	}
-
-	public void writeln(int integer) {
-		this.write(integer);
 		this.writeln();
 	}
 
