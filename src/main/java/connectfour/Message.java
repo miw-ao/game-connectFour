@@ -8,6 +8,7 @@ enum Message {
     VERTICAL_LINE(" | "),
     ENTER_COLUMN_TO_PUT("[#color] Enter a column to put a token: "),
     PLAYER_WIN("#player player: You win!!! :-)"),
+    PLAYER_TIED("You tied!!!"),
     RESUME("Do you want to continue");
 
     private String message;

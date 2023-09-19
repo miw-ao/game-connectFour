@@ -38,4 +38,11 @@ public class Turn {
         return this.players[this.activePlayer].getColor();
     }
 
+    boolean isTied(){
+        if (this.players[0].getPutTokens() + this.players[1].getPutTokens() == Coordinate.DIMENSION_ROW * Coordinate.DIMENSION_COLUMN){
+            return true;
+        }
+        return false;
+    }
+
 }

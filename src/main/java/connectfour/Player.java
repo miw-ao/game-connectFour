@@ -6,7 +6,7 @@ class Player {
 
     private Color color;
     private Board board;
-    // private int putTokens; Es util saber cuantos tokens se han puesto? Para el empate/limites
+    private int putTokens = 0;
 
     Player(Color color, Board board) {
         assert !color.isNull();
@@ -32,6 +32,7 @@ class Player {
         } while (error);
         Coordinate coordinate = new Coordinate(remainingColumnSquares - 1, column);
         this.board.putToken(coordinate, this.color);
+        this.putTokens++;
     }
 
     int inputColumn(){
@@ -56,4 +57,7 @@ class Player {
         return this.color;
     }
 
+    int getPutTokens() {
+        return this.putTokens;
+    }
 }

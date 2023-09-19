@@ -24,8 +24,14 @@ public class ConnectFour {
         do {
             this.turn.play();
             this.board.write();
-        } while (!this.isConnectFour());
-        this.turn.writeWinner();
+        } while (!this.isConnectFour() && !this.turn.isTied());
+
+        if (this.turn.isTied()) {
+            Message.PLAYER_TIED.writeln();
+        } else {
+            this.turn.writeWinner();
+        }
+
     }
 
     private boolean isConnectFour() {
