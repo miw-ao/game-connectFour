@@ -4,38 +4,45 @@ import utils.YesNoDialog;
 
 public class ConnectFour {
 
-    private Board board;
-    private Turn turn;
+    private final Board board;
+    private final Turn turn;
 
     ConnectFour() {
         this.board = new Board();
         this.turn = new Turn(this.board);
     }
 
-    private void play() {
+    public static void main(String[] args) {
+        new ConnectFour().runGame();
+    }
+
+    private void runGame() {
         do {
+            Message.TITLE.writeln();
+            this.board.write();
             this.playGame();
         } while (this.isResumedGame());
     }
 
+    private boolean isConnectFour() {
+        return this.board.isConnectFour(this.turn.getActiveColor());
+    }
+
     private void playGame() {
-        Message.TITLE.writeln();
-        this.board.write();
         do {
             this.turn.play();
             this.board.write();
-        } while (!this.isConnectFour() && !this.turn.isTied());
+        } while (!this.isConnectFour() && !this.isTied());
 
-        if (this.turn.isTied()) {
+        if (this.board.isTied(this.turn.getPlayers())) {
             Message.PLAYER_TIED.writeln();
         } else {
             this.turn.writeWinner();
         }
-
     }
 
-    private boolean isConnectFour() {
-        return this.board.isConnectFour(this.turn.getActiveColor());
+    private boolean isTied() {
+        return this.board.isTied(this.turn.getPlayers());
     }
 
     private boolean isResumedGame() {
@@ -44,11 +51,9 @@ public class ConnectFour {
         if (yesNoDialog.isAffirmative()) {
             this.board.reset();
             this.turn.reset();
+            return true;
         }
-        return yesNoDialog.isAffirmative();
+        return false;
     }
 
-    public static void main(String[] args) {
-        new ConnectFour().play();
-    }
 }

@@ -19,6 +19,7 @@ public class Console {
 		try {
 			input = this.bufferedReader.readLine();
 		} catch (Exception ex) {
+            this.writeError("string");
 		}
 		return input;
 	}

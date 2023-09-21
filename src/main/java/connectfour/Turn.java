@@ -9,6 +9,7 @@ public class Turn {
 
     Turn(Board board) {
         assert board != null;
+
         this.board = board;
         this.players = new Player[Turn.NUMBER_PLAYERS];
         this.reset();
@@ -16,7 +17,7 @@ public class Turn {
 
     void reset() {
         for (int i = 0; i < NUMBER_PLAYERS; i++) {
-            this.players[i] = new Player(Color.get(i), this.board);
+            this.players[i] = new Player(Color.getOrdinal(i), this.board);
         }
         this.activePlayer = 0;
     }
@@ -36,8 +37,8 @@ public class Turn {
         return this.players[this.activePlayer].getColor();
     }
 
-    boolean isTied(){
-        return this.players[0].getPutTokens() + this.players[1].getPutTokens() == Board.DIMENSION_ROW * Board.DIMENSION_COLUMN;
+    Player[] getPlayers() {
+        return this.players;
     }
 
 }

@@ -22,12 +22,12 @@ public class Board {
     }
 
     void putToken(Coordinate coordinate, Color color) {
+        assert !color.isNull();
 
         this.colors[coordinate.row()][coordinate.column()] = color;
     }
 
     private Color getColor(Coordinate coordinate) {
-
         return this.colors[coordinate.row()][coordinate.column()];
     }
 
@@ -35,17 +35,20 @@ public class Board {
         return column >= 0 && column < DIMENSION_COLUMN;
     }
 
-    int getRemainingColumnSquares(int column) {
-        int remainingColumnSquares = DIMENSION_ROW;
+    int getRemainingRowsInColumn(int column) {
+        int remainingRowsInColumn = DIMENSION_ROW;
 
         for (int i = DIMENSION_ROW - 1; i >= 0; i--) {
             if (this.colors[i][column] != Color.NULL) {
-                remainingColumnSquares--;
+                remainingRowsInColumn--;
             }
         }
-        return remainingColumnSquares;
+        return remainingRowsInColumn;
     }
 
+    boolean isTied(Player[] players) {
+        return players[0].getPutTokens() + players[1].getPutTokens() == DIMENSION_ROW * DIMENSION_COLUMN;
+    }
     boolean isConnectFour(Color color) {
         assert !color.isNull();
 

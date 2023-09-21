@@ -9,9 +9,9 @@ enum Message {
     ENTER_COLUMN_TO_PUT("[#color] Enter a column to put a token: "),
     PLAYER_WIN("#player player: You win!!! :-)"),
     PLAYER_TIED("You tied!!!"),
-    RESUME("Do you want to continue");
+    RESUME("Do you want to continue?");
 
-    private String message;
+    private final String message;
 
     Message(String message) {
         this.message = message;
@@ -28,13 +28,13 @@ enum Message {
     void writelnWin(String player) {
         assert this == Message.PLAYER_WIN;
 
-        Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
+        Console.getInstance().writeln(this.message.replaceAll("#player", player));
     }
 
     String messagePlayerColor(Color color) {
         assert this == Message.ENTER_COLUMN_TO_PUT;
 
-        return this.message.replaceAll("#color", "" + color.name());
+        return this.message.replaceAll("#color", color.name());
     }
 
     @Override

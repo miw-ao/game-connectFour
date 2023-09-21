@@ -8,7 +8,7 @@ enum Color {
     RED,
     NULL;
 
-    static Color get(int ordinal){
+    static Color getOrdinal(int ordinal) {
         assert ordinal >= 0 && ordinal < Color.NULL.ordinal();
 
         return Color.values()[ordinal];
@@ -16,12 +16,16 @@ enum Color {
 
     void write() {
         String colorName;
-        if (this.isYellow()) {
-            colorName = "Y";
-        } else if (this.isRed()) {
-            colorName = "R";
-        } else {
-            colorName = " ";
+        switch (this) {
+            case YELLOW:
+                colorName = "Y";
+                break;
+            case RED:
+                colorName = "R";
+                break;
+            default:
+                colorName = " ";
+                break;
         }
         Console.getInstance().write(colorName);
     }
@@ -30,11 +34,4 @@ enum Color {
         return this == Color.NULL;
     }
 
-    boolean isYellow() {
-        return this == Color.YELLOW;
-    }
-
-    boolean isRed() {
-        return this == Color.RED;
-    }
 }

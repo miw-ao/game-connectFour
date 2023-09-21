@@ -4,8 +4,8 @@ import utils.Console;
 
 class Player {
 
-    private Color color;
-    private Board board;
+    private final Color color;
+    private final Board board;
     private int putTokens = 0;
 
     Player(Color color, Board board) {
@@ -18,19 +18,19 @@ class Player {
 
     public void putToken() {
         int column;
-        int remainingColumnSquares;
+        int remainingRowsInColumn;
         boolean error;
         do {
             column = this.inputColumn();
-            remainingColumnSquares = this.board.getRemainingColumnSquares(column);
-            if (remainingColumnSquares == 0) {
+            remainingRowsInColumn = this.board.getRemainingRowsInColumn(column);
+            if (remainingRowsInColumn == 0) {
                 error = true;
                 Error.FULL_COLUMN.writeln();
             } else {
                 error = false;
             }
         } while (error);
-        Coordinate coordinate = new Coordinate(remainingColumnSquares - 1, column);
+        Coordinate coordinate = new Coordinate(remainingRowsInColumn - 1, column);
         this.board.putToken(coordinate, this.color);
         this.putTokens++;
     }
@@ -60,4 +60,5 @@ class Player {
     int getPutTokens() {
         return this.putTokens;
     }
+
 }
