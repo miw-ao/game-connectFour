@@ -11,34 +11,34 @@ enum Message {
     PLAYER_TIED("You tied!!!"),
     RESUME("Do you want to continue?");
 
-    private final String message;
+    private final String msg;
 
     Message(String message) {
-        this.message = message;
+        this.msg = message;
     }
 
     void write() {
-        Console.getInstance().write(this.message);
+        Console.getInstance().write(this.msg);
     }
 
     void writeln() {
-        Console.getInstance().writeln(this.message);
+        Console.getInstance().writeln(this.msg);
     }
 
     void writelnWin(String player) {
         assert this == Message.PLAYER_WIN;
 
-        Console.getInstance().writeln(this.message.replaceAll("#player", player));
+        Console.getInstance().writeln(this.msg.replace("#player", player));
     }
 
     String messagePlayerColor(Color color) {
         assert this == Message.ENTER_COLUMN_TO_PUT;
 
-        return this.message.replaceAll("#color", color.name());
+        return this.msg.replace("#color", color.name());
     }
 
     @Override
     public String toString() {
-        return message;
+        return msg;
     }
 }
