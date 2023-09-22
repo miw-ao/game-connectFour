@@ -20,11 +20,11 @@ public class ConnectFour {
         do {
             Message.TITLE.writeln();
             this.board.write();
-            this.playGame();
+            this.play();
         } while (this.isResumedGame());
     }
 
-    private void playGame() {
+    private void play() {
         do {
             this.turn.play();
             this.board.write();
