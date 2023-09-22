@@ -24,10 +24,6 @@ public class ConnectFour {
         } while (this.isResumedGame());
     }
 
-    private boolean isConnectFour() {
-        return this.board.isConnectFour(this.turn.getActiveColor());
-    }
-
     private void playGame() {
         do {
             this.turn.play();
@@ -39,6 +35,10 @@ public class ConnectFour {
         } else {
             this.turn.writeWinner();
         }
+    }
+
+    private boolean isConnectFour() {
+        return this.board.isConnectFour(this.turn.getActiveColor());
     }
 
     private boolean isTied() {
