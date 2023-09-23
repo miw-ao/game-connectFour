@@ -55,6 +55,20 @@ public class Board {
         return isHorizontal(color) || isVertical(color) || isMainDiagonal(color) || isInverseDiagonal(color);
     }
 
+    /*
+     * Atributo del tablero saber donde ha caido la última ficha
+     * Checkear donde ha caido la ultima
+     * Clase Linea que tiene 4 coordenadas (clase coordenada)
+     * El tablero dice si hay conecta4, yo le paso la línea
+     * El tablero que sabe donde ha caido la ultima, y crea una línea
+     * ¿Que hace el tablero con la línea? Verificar si las 4 son del mismo color -> 4 en raya
+     * Una vez comprobada esa línea, tengo que desplazar la línea hacia la izd (oeste)
+     * Enumerado dirección: Oeste (0,-1), Norte (1,0). Cada dirección es responsable de donde se mueve
+     * QUe hace la linea para desplazarse al oeste? La línea da una orden a cada coordenada que se desplace en una dirección
+     * Creo una línea para cada dirección (Y muevo cada línea en la dirección opuesta, Dirección dame tu opuesto)
+     * La línea se mueve donde quiere porque le llega un parámetro
+     * */
+
     private boolean isHorizontal(Color color) {
         Color currentColor;
         for (int row = 0; row < this.colors.length; row++) {
