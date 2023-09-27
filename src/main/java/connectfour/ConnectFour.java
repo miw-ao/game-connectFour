@@ -4,6 +4,7 @@ import utils.YesNoDialog;
 
 public class ConnectFour {
 
+    public static final int CONNECT_FOUR = 4;
     private final Board board;
     private final Turn turn;
 
@@ -30,7 +31,7 @@ public class ConnectFour {
             this.board.write();
         } while (!this.isConnectFour() && !this.isTied());
 
-        if (this.board.isTied(this.turn.getPlayers())) {
+        if (this.board.isTied()) {
             Message.PLAYER_TIED.writeln();
         } else {
             this.turn.writeWinner();
@@ -42,7 +43,7 @@ public class ConnectFour {
     }
 
     private boolean isTied() {
-        return this.board.isTied(this.turn.getPlayers());
+        return this.board.isTied();
     }
 
     private boolean isResumedGame() {

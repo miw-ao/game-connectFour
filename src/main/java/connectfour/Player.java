@@ -6,7 +6,6 @@ class Player {
 
     private final Color color;
     private final Board board;
-    private int putTokens = 0;
 
     Player(Color color, Board board) {
         assert !color.isNull();
@@ -32,10 +31,9 @@ class Player {
         } while (error);
         Coordinate coordinate = new Coordinate(remainingRowsInColumn - 1, column);
         this.board.putToken(coordinate, this.color);
-        this.putTokens++;
     }
 
-    int inputColumn(){
+    int inputColumn() {
         int column;
         Console console = Console.getInstance();
         boolean error;
@@ -55,10 +53,6 @@ class Player {
 
     Color getColor() {
         return this.color;
-    }
-
-    int getPutTokens() {
-        return this.putTokens;
     }
 
 }

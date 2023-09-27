@@ -2,11 +2,16 @@ package connectfour;
 
 import utils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Board {
 
     public static final int DIMENSION_ROW = 6;
     public static final int DIMENSION_COLUMN = 7;
     private final Color[][] colors;
+    private int putTokens;
+    private Coordinate lastCoordinate;
 
     Board() {
         this.colors = new Color[DIMENSION_ROW][DIMENSION_COLUMN];
@@ -14,6 +19,7 @@ public class Board {
     }
 
     void reset() {
+        this.putTokens = 0;
         for (int i = 0; i < DIMENSION_ROW; i++) {
             for (int j = 0; j < DIMENSION_COLUMN; j++) {
                 this.colors[i][j] = Color.NULL;
@@ -24,11 +30,13 @@ public class Board {
     void putToken(Coordinate coordinate, Color color) {
         assert !color.isNull();
 
-        this.colors[coordinate.row()][coordinate.column()] = color;
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+        this.putTokens++;
+        this.lastCoordinate = coordinate;
     }
 
     private Color getColor(Coordinate coordinate) {
-        return this.colors[coordinate.row()][coordinate.column()];
+        return this.colors[coordinate.getRow()][coordinate.getColumn()];
     }
 
     boolean isValidColumn(int column) {
@@ -46,13 +54,39 @@ public class Board {
         return remainingRowsInColumn;
     }
 
-    boolean isTied(Player[] players) {
-        return players[0].getPutTokens() + players[1].getPutTokens() == DIMENSION_ROW * DIMENSION_COLUMN;
+    boolean isTied() {
+        return this.putTokens == DIMENSION_ROW * DIMENSION_COLUMN;
     }
+
     boolean isConnectFour(Color color) {
         assert !color.isNull();
 
-        return isHorizontal(color) || isVertical(color) || isMainDiagonal(color) || isInverseDiagonal(color);
+
+        if (this.putTokens < (ConnectFour.CONNECT_FOUR * 2) - 1) {
+            return false;
+        }
+
+        List<Line> initialLines = new ArrayList<>();
+        for (Direction direction : Direction.values()) {
+            initialLines.add(new Line(lastCoordinate, direction));
+        }
+
+        return false;
+    }
+
+    private boolean checkLineColor(Line line, Color color) {
+        int connectedTokens;
+        Coordinate checkingCoordinate;
+
+        connectedTokens = 0;
+        for (int i = 0; i < ConnectFour.CONNECT_FOUR; i++) {
+            checkingCoordinate = line.getCoordinates().get(i);
+            if (this.colors[checkingCoordinate.getRow()][checkingCoordinate.getColumn()] == color) {
+                connectedTokens++;
+            }
+        }
+
+        return connectedTokens == ConnectFour.CONNECT_FOUR;
     }
 
     /*

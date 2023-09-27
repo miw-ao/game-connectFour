@@ -2,8 +2,8 @@ package connectfour;
 
 public class Turn {
 
-    private final Board board;
     static final int NUMBER_PLAYERS = 2;
+    private final Board board;
     private final Player[] players;
     private int activePlayer;
 
@@ -22,23 +22,19 @@ public class Turn {
         this.activePlayer = 0;
     }
 
-    void play(){
+    void play() {
         this.players[this.activePlayer].putToken();
-        if (!this.board.isConnectFour(this.getActiveColor())){
-            this.activePlayer = (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
+        if (!this.board.isConnectFour(this.getActiveColor())) {
+            this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
     }
 
-    void writeWinner(){
+    void writeWinner() {
         this.players[this.activePlayer].writeWinner();
     }
 
     Color getActiveColor() {
         return this.players[this.activePlayer].getColor();
-    }
-
-    Player[] getPlayers() {
-        return this.players;
     }
 
 }
