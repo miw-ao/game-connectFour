@@ -5,49 +5,53 @@ import java.util.List;
 
 public class Line {
 
-    private List<Coordinate> coordinates;
+    private final List<Coordinate> coordinates;
+    private final Direction direction;
 
     Line(Coordinate lastCoordinate, Direction direction) {
         this.coordinates = new ArrayList<>(ConnectFour.CONNECT_FOUR);
-        this.completeLine(lastCoordinate, direction);
+        this.direction = direction;
+        this.completeInitialLine(lastCoordinate);
     }
 
-    private void completeLine(Coordinate lastCoordinate, Direction direction) {
-        assert direction != null;
-
+    private void completeInitialLine(Coordinate lastCoordinate) {
         int coordinatesInLine = 0;
         Coordinate currentCoordinate = lastCoordinate;
         int invalidCoordinates = 0;
-
+        this.direction.reset();
         do {
             if (!currentCoordinate.isValid()) {
-                direction.opposite();
+                this.direction.opposite();
                 invalidCoordinates++;
-                currentCoordinate = lastCoordinate.nextCoordinate(direction);
+                currentCoordinate = lastCoordinate.nextCoordinate(this.direction);
             } else {
                 this.coordinates.add(currentCoordinate);
                 coordinatesInLine++;
-                currentCoordinate = currentCoordinate.nextCoordinate(direction);
+                currentCoordinate = currentCoordinate.nextCoordinate(this.direction);
             }
         } while (invalidCoordinates < 2 && coordinatesInLine < 4);
 
     }
 
-    /* private void moveLine(Direction direction) {
-        List<Coordinate> movedCoordinates = new ArrayList<>();
+    public boolean isMoveable() {
+        // TODO: La linea a parte de ser contenida en el tablero, hay que verificar que contenga la ultima ficha que se ha puesto (lastCoordinate)
+        // En esta clase no se sabe lastCoordinate, habra que pasarselo por parametro
+        this.direction.directionToMove();
         for (Coordinate coordinate : this.coordinates) {
-            movedCoordinates.add(new Coordinate(coordinate.getRow() + direction.getRowIncrement(), coordinate.getColumn() + direction.getColumnIncrement()));
+            if (!coordinate.nextCoordinate(this.direction).isValid()) {
+                return false;
+            }
         }
-        this.coordinates = movedCoordinates;
+        return true;
+    }
 
-    } */
+    public void move() {
+        this.direction.directionToMove();
+        this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction));
+    }
 
     public List<Coordinate> getCoordinates() {
         return this.coordinates;
-    }
-
-    public void setCoordinates(List<Coordinate> coordinates) {
-        this.coordinates = coordinates;
     }
 
 }

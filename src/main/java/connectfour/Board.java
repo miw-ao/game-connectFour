@@ -74,13 +74,30 @@ public class Board {
             }
         }
 
+        return checkLines(initialLines, color);
+    }
+
+    private boolean checkLines(List<Line> initialLines, Color color) {
+        // TODO: Mirar si hay una mejor forma de hacerlo, para que no se repita ese if. A lo mejor comprobando
+        // primero en la funcion de arriba las iniciales y luego moverlas, do while, no se...
+        for (Line line : initialLines) {
+            if (this.checkLineColor(line, color)) {
+                return true;
+            }
+            while (line.isMoveable()) {
+                line.move();
+                if (this.checkLineColor(line, color)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
     private boolean checkLineColor(Line line, Color color) {
         int connectedTokens;
         Coordinate checkingCoordinate;
-
         connectedTokens = 0;
         for (int i = 0; i < ConnectFour.CONNECT_FOUR; i++) {
             checkingCoordinate = line.getCoordinates().get(i);
@@ -90,100 +107,6 @@ public class Board {
         }
 
         return connectedTokens == ConnectFour.CONNECT_FOUR;
-    }
-
-    /*
-     * Atributo del tablero saber donde ha caido la última ficha
-     * Checkear donde ha caido la ultima
-     * Clase Linea que tiene 4 coordenadas (clase coordenada)
-     * El tablero dice si hay conecta4, yo le paso la línea
-     * El tablero que sabe donde ha caido la ultima, y crea una línea
-     * ¿Que hace el tablero con la línea? Verificar si las 4 son del mismo color -> 4 en raya
-     * Una vez comprobada esa línea, tengo que desplazar la línea hacia la izd (oeste)
-     * Enumerado dirección: Oeste (0,-1), Norte (1,0). Cada dirección es responsable de donde se mueve
-     * QUe hace la linea para desplazarse al oeste? La línea da una orden a cada coordenada que se desplace en una dirección
-     * Creo una línea para cada dirección (Y muevo cada línea en la dirección opuesta, Dirección dame tu opuesto)
-     * La línea se mueve donde quiere porque le llega un parámetro
-     * */
-
-    private boolean isHorizontal(Color color) {
-        Color currentColor;
-        for (int row = 0; row < this.colors.length; row++) {
-            for (int column = 0; column < this.colors[row].length - 3; column++) {
-                currentColor = this.colors[row][column];
-
-                if (currentColor.isNull() || currentColor != color) {
-                    continue;
-                }
-
-                if (currentColor == this.colors[row][column + 1] &&
-                        currentColor == this.colors[row][column + 2] &&
-                        currentColor == this.colors[row][column + 3]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isVertical(Color color) {
-        Color currentColor;
-        for (int row = 0; row < this.colors.length - 3; row++) {
-            for (int column = 0; column < this.colors[row].length; column++) {
-                currentColor = this.colors[row][column];
-
-                if (currentColor.isNull() || currentColor != color) {
-                    continue;
-                }
-
-                if (currentColor == this.colors[row + 1][column] &&
-                        currentColor == this.colors[row + 2][column] &&
-                        currentColor == this.colors[row + 3][column]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isMainDiagonal(Color color) {
-        Color currentColor;
-        for (int row = 0; row < this.colors.length - 3; row++) {
-            for (int column = 0; column < this.colors[row].length - 3; column++) {
-                currentColor = this.colors[row][column];
-
-                if (currentColor.isNull() || currentColor != color) {
-                    continue;
-                }
-
-                if (currentColor == this.colors[row + 1][column + 1] &&
-                        currentColor == this.colors[row + 2][column + 2] &&
-                        currentColor == this.colors[row + 3][column + 3]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isInverseDiagonal(Color color) {
-        Color currentColor;
-        for (int row = 0; row < this.colors.length - 3; row++) {
-            for (int column = 3; column < this.colors[row].length; column++) {
-                currentColor = this.colors[row][column];
-
-                if (currentColor.isNull() || currentColor != color) {
-                    continue;
-                }
-
-                if (currentColor == this.colors[row + 1][column - 1] &&
-                        currentColor == this.colors[row + 2][column - 2] &&
-                        currentColor == this.colors[row + 3][column - 3]) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     void write() {
