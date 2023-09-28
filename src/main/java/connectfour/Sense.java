@@ -18,6 +18,14 @@ public enum Sense {
         this.columnIncrement = columnIncrement;
     }
 
+    public int getRowIncrement() {
+        return this.rowIncrement;
+    }
+
+    public int getColumnIncrement() {
+        return this.columnIncrement;
+    }
+
     public Sense getOpposite() {
         return switch (this) {
             case NORTH -> SOUTH;

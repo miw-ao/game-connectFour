@@ -12,6 +12,10 @@ public enum Direction {
         this.sense = sense;
     }
 
+    public Sense getSense() {
+        return this.sense;
+    }
+
     public void opposite() {
         this.sense = this.sense.getOpposite();
     }

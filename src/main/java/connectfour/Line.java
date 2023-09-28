@@ -20,14 +20,14 @@ public class Line {
         int invalidCoordinates = 0;
 
         do {
-            currentCoordinate = currentCoordinate.nextCoordinate(direction);
             if (!currentCoordinate.isValid()) {
                 direction.opposite();
                 invalidCoordinates++;
-                currentCoordinate = lastCoordinate;
+                currentCoordinate = lastCoordinate.nextCoordinate(direction);
             } else {
-                coordinatesInLine++;
                 this.coordinates.add(currentCoordinate);
+                coordinatesInLine++;
+                currentCoordinate = currentCoordinate.nextCoordinate(direction);
             }
         } while (invalidCoordinates < 2 && coordinatesInLine < 4);
 

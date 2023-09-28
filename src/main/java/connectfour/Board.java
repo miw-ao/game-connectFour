@@ -61,14 +61,17 @@ public class Board {
     boolean isConnectFour(Color color) {
         assert !color.isNull();
 
-
         if (this.putTokens < (ConnectFour.CONNECT_FOUR * 2) - 1) {
             return false;
         }
 
         List<Line> initialLines = new ArrayList<>();
+        Line line;
         for (Direction direction : Direction.values()) {
-            initialLines.add(new Line(lastCoordinate, direction));
+            line = new Line(lastCoordinate, direction);
+            if (line.getCoordinates().size() == 4) {
+                initialLines.add(line);
+            }
         }
 
         return false;

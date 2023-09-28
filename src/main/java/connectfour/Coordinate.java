@@ -20,7 +20,7 @@ class Coordinate {
     }
 
     public Coordinate nextCoordinate(Direction direction) {
-        return new Coordinate(this.getRow() + direction.getRowIncrement(), this.getColumn() + direction.getColumnIncrement());
+        return new Coordinate(this.getRow() + direction.getSense().getRowIncrement(), this.getColumn() + direction.getSense().getColumnIncrement());
     }
 
     public boolean isValid() {
