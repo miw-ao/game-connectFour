@@ -19,17 +19,11 @@ class Coordinate {
         return this.column;
     }
 
-    public Coordinate nextCoordinate(Direction direction) {
-        return new Coordinate(this.getRow() + direction.getSense().getRowIncrement(), this.getColumn() + direction.getSense().getColumnIncrement());
+    public Coordinate nextCoordinate(Sense sense) {
+        return new Coordinate(this.getRow() + sense.getRowIncrement(), this.getColumn() + sense.getColumnIncrement());
     }
 
-    public boolean isValid() {
-        // TODO: Esto deberia estar en board como isValidCOlumn como boolean isValidCoordinate(Coordinate coordinate)
-        // PROBLEM: cuando lo hice: Linea no tiene el tablero, entonces no tiene sentido crear un nuevo tablero que no es el de la partida
-        // y preguntarle que si es valida esa coordenada.
-        // ¿Hay alguna solucion?
-        return this.row >= 0 && this.row < Board.DIMENSION_ROW && this.column >= 0 && this.column < Board.DIMENSION_COLUMN;
-    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -5,49 +5,54 @@ import java.util.List;
 
 public class Line {
 
-    private final List<Coordinate> coordinates;
     private final Direction direction;
+    private final List<Coordinate> coordinates;
 
-    Line(Coordinate lastCoordinate, Direction direction) {
-        this.coordinates = new ArrayList<>(ConnectFour.CONNECT_FOUR);
+    Line(Coordinate lastCoordinate, Direction direction, Board board) {
         this.direction = direction;
-        this.completeInitialLine(lastCoordinate);
+        this.coordinates = new ArrayList<>(ConnectFour.CONNECT_FOUR);
+        this.completeInitialLine(lastCoordinate, board);
     }
 
-    private void completeInitialLine(Coordinate lastCoordinate) {
+    private void completeInitialLine(Coordinate lastCoordinate, Board board) {
         int coordinatesInLine = 0;
+        int senseChanges = 0;
         Coordinate currentCoordinate = lastCoordinate;
-        int invalidCoordinates = 0;
         this.direction.reset();
         do {
-            if (!currentCoordinate.isValid()) {
-                this.direction.opposite();
-                invalidCoordinates++;
-                currentCoordinate = lastCoordinate.nextCoordinate(this.direction);
+            if (!board.isValidCoordinate(currentCoordinate)) {
+                this.direction.directionToMove();
+                senseChanges++;
+                currentCoordinate = lastCoordinate.nextCoordinate(this.direction.getSense());
             } else {
                 this.coordinates.add(currentCoordinate);
                 coordinatesInLine++;
-                currentCoordinate = currentCoordinate.nextCoordinate(this.direction);
+                currentCoordinate = currentCoordinate.nextCoordinate(this.direction.getSense());
             }
-        } while (invalidCoordinates < 2 && coordinatesInLine < 4);
+        } while (senseChanges < 2 && coordinatesInLine < ConnectFour.CONNECT_FOUR);
 
     }
 
-    public boolean isMoveable() {
-        // TODO: La linea a parte de ser contenida en el tablero, hay que verificar que contenga la ultima ficha que se ha puesto (lastCoordinate)
-        // En esta clase no se sabe lastCoordinate, habra que pasarselo por parametro
+    public boolean isMovable(Coordinate lastCoordinate, Board board) {
         this.direction.directionToMove();
+        boolean containsLastCoordinate = false;
+        boolean areAllCoordinatesMovable = true;
+        Coordinate nextCoordinate;
         for (Coordinate coordinate : this.coordinates) {
-            if (!coordinate.nextCoordinate(this.direction).isValid()) {
-                return false;
+            nextCoordinate = coordinate.nextCoordinate(this.direction.getSense());
+            if (!board.isValidCoordinate(nextCoordinate)) {
+                areAllCoordinatesMovable = false;
+            }
+            if (nextCoordinate.equals(lastCoordinate)) {
+                containsLastCoordinate = true;
             }
         }
-        return true;
+        return areAllCoordinatesMovable && containsLastCoordinate;
     }
 
     public void move() {
         this.direction.directionToMove();
-        this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction));
+        this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction.getSense()));
     }
 
     public List<Coordinate> getCoordinates() {

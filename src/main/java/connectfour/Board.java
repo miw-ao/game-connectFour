@@ -43,6 +43,10 @@ public class Board {
         return column >= 0 && column < DIMENSION_COLUMN;
     }
 
+    public boolean isValidCoordinate(Coordinate coordinate) {
+        return coordinate.getRow() >= 0 && coordinate.getRow() < Board.DIMENSION_ROW && coordinate.getColumn() >= 0 && coordinate.getColumn() < Board.DIMENSION_COLUMN;
+    }
+
     int getRemainingRowsInColumn(int column) {
         int remainingRowsInColumn = DIMENSION_ROW;
 
@@ -65,33 +69,30 @@ public class Board {
             return false;
         }
 
-        List<Line> initialLines = new ArrayList<>();
+        List<Line> lines = new ArrayList<>();
         Line line;
         for (Direction direction : Direction.values()) {
-            line = new Line(lastCoordinate, direction);
-            if (line.getCoordinates().size() == 4) {
-                initialLines.add(line);
+            line = new Line(lastCoordinate, direction, this);
+            if (line.getCoordinates().size() == ConnectFour.CONNECT_FOUR) {
+                lines.add(line);
             }
         }
+        do {
+            if (this.checkLines(lines, color)) {
+                return true;
+            }
+            lines = this.getMovedLines(lines);
+        } while (!lines.isEmpty());
 
-        return checkLines(initialLines, color);
+        return false;
     }
 
-    private boolean checkLines(List<Line> initialLines, Color color) {
-        // TODO: Mirar si hay una mejor forma de hacerlo, para que no se repita ese if. A lo mejor comprobando
-        // primero en la funcion de arriba las iniciales y luego moverlas, do while, no se...
-        for (Line line : initialLines) {
+    private boolean checkLines(List<Line> lines, Color color) {
+        for (Line line : lines) {
             if (this.checkLineColor(line, color)) {
                 return true;
             }
-            while (line.isMoveable()) {
-                line.move();
-                if (this.checkLineColor(line, color)) {
-                    return true;
-                }
-            }
         }
-
         return false;
     }
 
@@ -105,9 +106,21 @@ public class Board {
                 connectedTokens++;
             }
         }
-
         return connectedTokens == ConnectFour.CONNECT_FOUR;
     }
+
+    private List<Line> getMovedLines(List<Line> lines) {
+        List<Line> movedLines = new ArrayList<>();
+        for (Line movedLine: lines) {
+            if (movedLine.isMovable(this.lastCoordinate, this)) {
+                movedLine.move();
+                movedLines.add(movedLine);
+            }
+        }
+        return movedLines;
+    }
+
+
 
     void write() {
         Message.HORIZONTAL_LINE.writeln();

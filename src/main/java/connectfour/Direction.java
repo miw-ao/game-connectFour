@@ -24,20 +24,10 @@ public enum Direction {
     }
 
     public void directionToMove() {
-        switch (this) {
-            case HORIZONTAL:
-                this.sense = Sense.EAST;
-                break;
-            case VERTICAL:
-                this.sense = Sense.NORTH;
-                break;
-            case MAIN_DIAGONAL:
-                this.sense = Sense.NORTH_WEST;
-                break;
-            case INVERSE_DIAGONAL:
-                this.sense = Sense.NORTH_EAST;
-                break;
-        }
+        HORIZONTAL.sense = Sense.EAST;
+        VERTICAL.sense = Sense.NORTH;
+        MAIN_DIAGONAL.sense = Sense.NORTH_WEST;
+        INVERSE_DIAGONAL.sense = Sense.NORTH_EAST;
     }
 
     public void opposite() {
