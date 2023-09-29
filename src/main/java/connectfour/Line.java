@@ -18,28 +18,28 @@ public class Line {
         int coordinatesInLine = 0;
         int senseChanges = 0;
         Coordinate currentCoordinate = lastCoordinate;
-        this.direction.reset();
+        this.direction.moveInMainSense();
         do {
             if (!board.isValidCoordinate(currentCoordinate)) {
-                this.direction.directionToMove();
+                this.direction.moveInOppositeSense();
                 senseChanges++;
-                currentCoordinate = lastCoordinate.nextCoordinate(this.direction.getSense());
+                currentCoordinate = lastCoordinate.nextCoordinate(this.direction.getCurrentSense());
             } else {
                 this.coordinates.add(currentCoordinate);
                 coordinatesInLine++;
-                currentCoordinate = currentCoordinate.nextCoordinate(this.direction.getSense());
+                currentCoordinate = currentCoordinate.nextCoordinate(this.direction.getCurrentSense());
             }
         } while (senseChanges < 2 && coordinatesInLine < ConnectFour.CONNECT_FOUR);
 
     }
 
     public boolean isMovable(Coordinate lastCoordinate, Board board) {
-        this.direction.directionToMove();
+        this.direction.moveInOppositeSense();
         boolean containsLastCoordinate = false;
         boolean areAllCoordinatesMovable = true;
         Coordinate nextCoordinate;
         for (Coordinate coordinate : this.coordinates) {
-            nextCoordinate = coordinate.nextCoordinate(this.direction.getSense());
+            nextCoordinate = coordinate.nextCoordinate(this.direction.getCurrentSense());
             if (!board.isValidCoordinate(nextCoordinate)) {
                 areAllCoordinatesMovable = false;
             }
@@ -51,8 +51,8 @@ public class Line {
     }
 
     public void move() {
-        this.direction.directionToMove();
-        this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction.getSense()));
+        this.direction.moveInOppositeSense();
+        this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction.getCurrentSense()));
     }
 
     public List<Coordinate> getCoordinates() {
