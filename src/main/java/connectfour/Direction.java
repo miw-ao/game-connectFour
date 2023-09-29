@@ -1,21 +1,18 @@
 package connectfour;
 
 public enum Direction {
-    HORIZONTAL(Sense.WEST, Sense.EAST),
-    VERTICAL(Sense.SOUTH, Sense.NORTH),
-    MAIN_DIAGONAL(Sense.SOUTH_EAST, Sense.NORTH_WEST),
-    INVERSE_DIAGONAL(Sense.SOUTH_WEST, Sense.NORTH_EAST);
+    HORIZONTAL(new Sense[]{Sense.WEST, Sense.EAST}),
+    VERTICAL(new Sense[]{Sense.SOUTH, Sense.NORTH}),
+    MAIN_DIAGONAL(new Sense[]{Sense.SOUTH_EAST, Sense.NORTH_WEST}),
+    INVERSE_DIAGONAL(new Sense[]{Sense.SOUTH_WEST, Sense.NORTH_EAST});
 
-    private final Sense mainSense;
-    private final Sense oppositeSense;
+    private final Sense[] senses;
 
     private Sense currentSense;
 
-    Direction(Sense mainSense, Sense oppositeSense) {
-        this.mainSense = mainSense;
-        this.oppositeSense = oppositeSense;
-
-        this.currentSense = mainSense;
+    Direction(Sense[] senses) {
+        this.senses = senses;
+        this.currentSense = this.senses[0];
     }
 
     public Sense getCurrentSense() {
@@ -23,10 +20,10 @@ public enum Direction {
     }
 
     public void moveInMainSense() {
-        this.currentSense = this.mainSense;
+        this.currentSense = this.senses[0];
     }
 
     public void moveInOppositeSense() {
-        this.currentSense = this.oppositeSense;
+        this.currentSense = this.senses[1];
     }
 }
