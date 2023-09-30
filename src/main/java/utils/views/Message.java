@@ -1,8 +1,8 @@
-package connectfour;
+package utils.views;
 
-import utils.Console;
+import connectfour.types.Color;
 
-enum Message {
+public enum Message {
     TITLE("--- CONNECT FOUR ---"),
     HORIZONTAL_LINE("-------------------------------"),
     VERTICAL_LINE(" | "),
@@ -17,21 +17,21 @@ enum Message {
         this.msg = message;
     }
 
-    void write() {
+    public void write() {
         Console.getInstance().write(this.msg);
     }
 
-    void writeln() {
+    public void writeln() {
         Console.getInstance().writeln(this.msg);
     }
 
-    void writelnWin(String player) {
+    public void writelnWin(String player) {
         assert this == Message.PLAYER_WIN;
 
         Console.getInstance().writeln(this.msg.replace("#player", player));
     }
 
-    String messagePlayerColor(Color color) {
+    public String messagePlayerColor(Color color) {
         assert this == Message.ENTER_COLUMN_TO_PUT;
 
         return this.msg.replace("#color", color.name());

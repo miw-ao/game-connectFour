@@ -1,12 +1,14 @@
-package connectfour;
+package connectfour.types;
+
+import utils.models.Sense;
 
 import java.util.Objects;
 
-class Coordinate {
+public class Coordinate {
     private final int row;
     private final int column;
 
-    Coordinate(int row, int column) {
+    public Coordinate(int row, int column) {
         this.row = row;
         this.column = column;
     }

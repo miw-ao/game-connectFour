@@ -1,4 +1,7 @@
-package connectfour;
+package connectfour.models;
+
+import connectfour.types.Coordinate;
+import utils.models.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +13,7 @@ public class Line {
 
     Line(Coordinate lastCoordinate, Direction direction, Board board) {
         this.direction = direction;
-        this.coordinates = new ArrayList<>(ConnectFour.CONNECT_FOUR);
+        this.coordinates = new ArrayList<>(Game.CONNECT_FOUR);
         this.completeInitialLine(lastCoordinate, board);
     }
 
@@ -29,7 +32,7 @@ public class Line {
                 coordinatesInLine++;
                 currentCoordinate = currentCoordinate.nextCoordinate(this.direction.getCurrentSense());
             }
-        } while (senseChanges < 2 && coordinatesInLine < ConnectFour.CONNECT_FOUR);
+        } while (senseChanges < 2 && coordinatesInLine < Game.CONNECT_FOUR);
 
     }
 

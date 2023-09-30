@@ -23,7 +23,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>connectfour.ConnectFour</mainClass>
+                            <mainClass>connectfour.models.Game</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

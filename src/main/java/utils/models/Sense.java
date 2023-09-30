@@ -1,4 +1,4 @@
-package connectfour;
+package utils.models;
 
 public enum Sense {
     NORTH(-1, 0),

@@ -1,4 +1,4 @@
-package connectfour;
+package utils.models;
 
 public enum Direction {
     HORIZONTAL(new Sense[]{Sense.WEST, Sense.EAST}),

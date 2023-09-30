@@ -1,6 +1,10 @@
-package connectfour;
+package connectfour.models;
 
-import utils.Console;
+import connectfour.types.Color;
+import connectfour.types.Error;
+import connectfour.types.Coordinate;
+import utils.views.Message;
+import utils.views.Console;
 
 class Player {
 

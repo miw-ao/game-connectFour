@@ -1,4 +1,6 @@
-package connectfour;
+package connectfour.models;
+
+import connectfour.types.Color;
 
 public class Turn {
 
@@ -22,11 +24,15 @@ public class Turn {
         this.activePlayer = 0;
     }
 
-    void play() {
+    void next() {
         this.players[this.activePlayer].putToken();
         if (!this.board.isConnectFour(this.getActiveColor())) {
             this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
+    }
+
+    Player getActivePlayer() {
+        return this.players[this.activePlayer];
     }
 
     void writeWinner() {
@@ -37,4 +43,7 @@ public class Turn {
         return this.players[this.activePlayer].getColor();
     }
 
+    void putToken() {
+        this.getActivePlayer().putToken();
+    }
 }

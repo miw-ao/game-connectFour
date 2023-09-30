@@ -1,6 +1,10 @@
-package connectfour;
+package connectfour.models;
 
-import utils.Console;
+import connectfour.types.Color;
+import connectfour.types.Coordinate;
+import utils.views.Message;
+import utils.models.Direction;
+import utils.views.Console;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,7 @@ public class Board {
         this.lastCoordinate = coordinate;
     }
 
-    private Color getColor(Coordinate coordinate) {
+    public Color getColor(Coordinate coordinate) {
         return this.colors[coordinate.getRow()][coordinate.getColumn()];
     }
 
@@ -65,7 +69,7 @@ public class Board {
     boolean isConnectFour(Color color) {
         assert !color.isNull();
 
-        if (this.putTokens < (ConnectFour.CONNECT_FOUR * 2) - 1) {
+        if (this.putTokens < (Game.CONNECT_FOUR * 2) - 1) {
             return false;
         }
 
@@ -73,7 +77,7 @@ public class Board {
         Line line;
         for (Direction direction : Direction.values()) {
             line = new Line(lastCoordinate, direction, this);
-            if (line.getCoordinates().size() == ConnectFour.CONNECT_FOUR) {
+            if (line.getCoordinates().size() == Game.CONNECT_FOUR) {
                 lines.add(line);
             }
         }
@@ -100,13 +104,13 @@ public class Board {
         int connectedTokens;
         Coordinate checkingCoordinate;
         connectedTokens = 0;
-        for (int i = 0; i < ConnectFour.CONNECT_FOUR; i++) {
+        for (int i = 0; i < Game.CONNECT_FOUR; i++) {
             checkingCoordinate = line.getCoordinates().get(i);
             if (this.colors[checkingCoordinate.getRow()][checkingCoordinate.getColumn()] == color) {
                 connectedTokens++;
             }
         }
-        return connectedTokens == ConnectFour.CONNECT_FOUR;
+        return connectedTokens == Game.CONNECT_FOUR;
     }
 
     private List<Line> getMovedLines(List<Line> lines) {
@@ -118,21 +122,6 @@ public class Board {
             }
         }
         return movedLines;
-    }
-
-
-
-    void write() {
-        Message.HORIZONTAL_LINE.writeln();
-        for (int i = 0; i < DIMENSION_ROW; i++) {
-            Message.VERTICAL_LINE.write();
-            for (int j = 0; j < DIMENSION_COLUMN; j++) {
-                this.getColor(new Coordinate(i, j)).write();
-                Message.VERTICAL_LINE.write();
-            }
-            Console.getInstance().writeln();
-        }
-        Message.HORIZONTAL_LINE.writeln();
     }
 
 }
