@@ -2,9 +2,7 @@ package connectfour.models;
 
 import connectfour.types.Color;
 import connectfour.types.Coordinate;
-import utils.views.Message;
 import utils.models.Direction;
-import utils.views.Console;
 
 import java.util.ArrayList;
 import java.util.List;

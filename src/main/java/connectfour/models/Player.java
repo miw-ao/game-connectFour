@@ -2,8 +2,8 @@ package connectfour.models;
 
 import connectfour.types.Color;
 import connectfour.types.Coordinate;
+import connectfour.views.Message;
 import utils.views.Console;
-import utils.views.Message;
 
 class Player {
 

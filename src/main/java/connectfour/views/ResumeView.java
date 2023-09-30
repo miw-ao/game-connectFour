@@ -1,7 +1,6 @@
 package connectfour.views;
 
 import connectfour.models.Game;
-import utils.views.Message;
 import utils.views.YesNoDialog;
 
 public class ResumeView extends WithGameView {

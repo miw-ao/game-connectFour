@@ -1,6 +1,7 @@
-package utils.views;
+package connectfour.views;
 
 import connectfour.types.Color;
+import utils.views.Console;
 
 public enum Message {
     TITLE("--- CONNECT FOUR ---"),

@@ -1,7 +1,6 @@
 package connectfour.views;
 
 import connectfour.models.Game;
-import utils.views.Message;
 
 class PlayView extends WithGameView {
 
