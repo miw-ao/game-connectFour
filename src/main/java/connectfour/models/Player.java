@@ -1,10 +1,9 @@
 package connectfour.models;
 
 import connectfour.types.Color;
-import connectfour.types.Error;
 import connectfour.types.Coordinate;
-import utils.views.Message;
 import utils.views.Console;
+import utils.views.Message;
 
 class Player {
 
@@ -19,6 +18,7 @@ class Player {
         this.board = board;
     }
 
+    //TODO revisar estos 2 métodos, las líneas comentadas ya que debe haber una forma de llamarlas desde el View en vez del Modelo. Así está mal.
     public void putToken() {
         int column;
         int remainingRowsInColumn;
@@ -26,12 +26,8 @@ class Player {
         do {
             column = this.inputColumn();
             remainingRowsInColumn = this.board.getRemainingRowsInColumn(column);
-            if (remainingRowsInColumn == 0) {
-                error = true;
-                Error.FULL_COLUMN.writeln();
-            } else {
-                error = false;
-            }
+            //                Error.FULL_COLUMN.writeln();
+            error = remainingRowsInColumn == 0;
         } while (error);
         Coordinate coordinate = new Coordinate(remainingRowsInColumn - 1, column);
         this.board.putToken(coordinate, this.color);
@@ -45,7 +41,7 @@ class Player {
             column = console.readInt(Message.ENTER_COLUMN_TO_PUT.messagePlayerColor(this.color)) - 1;
             error = !this.board.isValidColumn(column);
             if (error) {
-                Error.WRONG_COLUMN.writeln();
+//                Error.WRONG_COLUMN.writeln();
             }
         } while (error);
         return column;

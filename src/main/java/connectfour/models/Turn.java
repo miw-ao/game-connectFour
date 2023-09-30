@@ -25,22 +25,17 @@ public class Turn {
     }
 
     void next() {
-        this.players[this.activePlayer].putToken();
         if (!this.board.isConnectFour(this.getActiveColor())) {
             this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
     }
 
+    Color getActiveColor() {
+        return this.getActivePlayer().getColor();
+    }
+
     Player getActivePlayer() {
         return this.players[this.activePlayer];
-    }
-
-    void writeWinner() {
-        this.players[this.activePlayer].writeWinner();
-    }
-
-    Color getActiveColor() {
-        return this.players[this.activePlayer].getColor();
     }
 
     void putToken() {

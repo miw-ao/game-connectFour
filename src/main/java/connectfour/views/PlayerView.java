@@ -4,7 +4,7 @@ import connectfour.models.Game;
 
 public class PlayerView {
 
-    private Game game;
+    private final Game game;
 
     PlayerView(Game game) {
         this.game = game;
@@ -18,9 +18,5 @@ public class PlayerView {
         this.game.putToken();
     }
 
-    private void errorPutToken() {
-        this.game.errorPutToken();
-    }
-
-    //TODO hay que ver como colocar putToken() e inputColumn(), lo comentado es del profe
+    //TODO hay que ver como colocar putToken() e inputColumn(), hay otro TODO en Player.java
 }

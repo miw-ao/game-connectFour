@@ -12,10 +12,15 @@ class PlayView extends WithGameView {
     void interact() {
         do {
             new PlayerView(this.game).interact();
-            this.game.next();
             new BoardView().write(this.game);
-        } while (!this.game.isConnectFour());
-        Message.PLAYER_WIN.writeln();
+            this.game.next();
+        } while (!this.game.isConnectFour() && !this.game.isTied());
+
+        if (this.game.isTied()) {
+            Message.PLAYER_TIED.writeln();
+        } else {
+            Message.PLAYER_WIN.writelnWin(this.game.getActiveColor().toString());
+        }
     }
 
 }
