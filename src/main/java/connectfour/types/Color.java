@@ -1,7 +1,5 @@
 package connectfour.types;
 
-import utils.views.Console;
-
 public enum Color {
 
     YELLOW,

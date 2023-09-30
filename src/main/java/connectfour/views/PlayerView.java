@@ -17,6 +17,5 @@ public class PlayerView {
     private void putToken() {
         this.game.putToken();
     }
-
     //TODO hay que ver como colocar putToken() e inputColumn(), hay otro TODO en Player.java
 }

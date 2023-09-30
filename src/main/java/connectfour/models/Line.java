@@ -33,7 +33,6 @@ public class Line {
                 currentCoordinate = currentCoordinate.nextCoordinate(this.direction.getCurrentSense());
             }
         } while (senseChanges < 2 && coordinatesInLine < Game.CONNECT_FOUR);
-
     }
 
     public boolean isMovable(Coordinate lastCoordinate, Board board) {

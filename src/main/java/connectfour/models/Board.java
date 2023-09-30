@@ -51,7 +51,6 @@ public class Board {
 
     int getRemainingRowsInColumn(int column) {
         int remainingRowsInColumn = DIMENSION_ROW;
-
         for (int i = DIMENSION_ROW - 1; i >= 0; i--) {
             if (this.colors[i][column] != Color.NULL) {
                 remainingRowsInColumn--;
@@ -70,7 +69,6 @@ public class Board {
         if (this.putTokens < (Game.CONNECT_FOUR * 2) - 1) {
             return false;
         }
-
         List<Line> lines = new ArrayList<>();
         Line line;
         for (Direction direction : Direction.values()) {
@@ -85,7 +83,6 @@ public class Board {
             }
             lines = this.getMovedLines(lines);
         } while (!lines.isEmpty());
-
         return false;
     }
 

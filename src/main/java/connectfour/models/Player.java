@@ -26,7 +26,7 @@ class Player {
         do {
             column = this.inputColumn();
             remainingRowsInColumn = this.board.getRemainingRowsInColumn(column);
-            //                Error.FULL_COLUMN.writeln();
+//            Error.FULL_COLUMN.writeln();
             error = remainingRowsInColumn == 0;
         } while (error);
         Coordinate coordinate = new Coordinate(remainingRowsInColumn - 1, column);
@@ -45,10 +45,6 @@ class Player {
             }
         } while (error);
         return column;
-    }
-
-    void writeWinner() {
-        Message.PLAYER_WIN.writelnWin(this.color.name());
     }
 
     Color getColor() {

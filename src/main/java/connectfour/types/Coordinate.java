@@ -25,8 +25,6 @@ public class Coordinate {
         return new Coordinate(this.getRow() + sense.getRowIncrement(), this.getColumn() + sense.getColumnIncrement());
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,4 +37,5 @@ public class Coordinate {
     public int hashCode() {
         return Objects.hash(row, column);
     }
+
 }
