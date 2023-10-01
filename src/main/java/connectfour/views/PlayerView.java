@@ -1,8 +1,10 @@
 package connectfour.views;
 
 import connectfour.models.Game;
+import connectfour.types.Error;
+import utils.views.Console;
 
-public class PlayerView {
+class PlayerView {
 
     private final Game game;
 
@@ -11,11 +13,28 @@ public class PlayerView {
     }
 
     void interact() {
-        this.putToken();
+        int column = this.inputColumn();
+        this.putToken(column);
     }
 
-    private void putToken() {
-        this.game.putToken();
+    private void putToken(int column) {
+        this.game.putToken(column);
     }
-    //TODO hay que ver como colocar putToken() e inputColumn(), hay otro TODO en Player.java
+
+    private int inputColumn() {
+        int column;
+        Console console = Console.getInstance();
+        Error error;
+        do {
+            column = console.readInt(Message.ENTER_COLUMN_TO_PUT.messagePlayerColor(this.game.getActiveColor())) - 1;
+            error = getInvalidColumn(column);
+        } while (!error.isNull());
+        return column;
+    }
+
+    private Error getInvalidColumn(int column) {
+        Error error = this.game.getInvalidColumn(column);
+        new ErrorView().writeln(error);
+        return error;
+    }
 }

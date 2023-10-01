@@ -1,8 +1,9 @@
 package connectfour.models;
 
 import connectfour.types.Color;
+import connectfour.types.Error;
 
-public class Turn {
+class Turn {
 
     static final int NUMBER_PLAYERS = 2;
     private final Board board;
@@ -38,8 +39,11 @@ public class Turn {
         return this.players[this.activePlayer];
     }
 
-    void putToken() {
-        this.getActivePlayer().putToken();
+    void putToken(int column) {
+        this.getActivePlayer().putToken(column);
     }
 
+    Error getInvalidColumn(int column) {
+        return this.getActivePlayer().getInvalidColumn(column);
+    }
 }

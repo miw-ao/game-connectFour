@@ -2,9 +2,9 @@ package connectfour.views;
 
 import connectfour.models.Game;
 
-public class WithGameView {
+class WithGameView {
 
-    protected Game game;
+    protected final Game game;
 
     WithGameView(Game game) {
         this.game = game;

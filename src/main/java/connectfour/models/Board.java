@@ -7,10 +7,10 @@ import utils.models.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+class Board {
 
-    public static final int DIMENSION_ROW = 6;
-    public static final int DIMENSION_COLUMN = 7;
+    private static final int DIMENSION_ROW = 6;
+    private static final int DIMENSION_COLUMN = 7;
     private final Color[][] colors;
     private int putTokens;
     private Coordinate lastCoordinate;
@@ -18,6 +18,14 @@ public class Board {
     Board() {
         this.colors = new Color[DIMENSION_ROW][DIMENSION_COLUMN];
         this.reset();
+    }
+
+    int getDimensionRow() {
+        return DIMENSION_ROW;
+    }
+
+    int getDimensionColumn() {
+        return DIMENSION_COLUMN;
     }
 
     void reset() {
@@ -37,16 +45,20 @@ public class Board {
         this.lastCoordinate = coordinate;
     }
 
-    public Color getColor(Coordinate coordinate) {
+    Color getColor(Coordinate coordinate) {
         return this.colors[coordinate.getRow()][coordinate.getColumn()];
+    }
+
+    boolean isValidCoordinate(Coordinate coordinate) {
+        return coordinate.getRow() >= 0 && coordinate.getRow() < Board.DIMENSION_ROW && coordinate.getColumn() >= 0 && coordinate.getColumn() < Board.DIMENSION_COLUMN;
     }
 
     boolean isValidColumn(int column) {
         return column >= 0 && column < DIMENSION_COLUMN;
     }
 
-    public boolean isValidCoordinate(Coordinate coordinate) {
-        return coordinate.getRow() >= 0 && coordinate.getRow() < Board.DIMENSION_ROW && coordinate.getColumn() >= 0 && coordinate.getColumn() < Board.DIMENSION_COLUMN;
+    boolean isFullColumn(int column) {
+        return this.getRemainingRowsInColumn(column) == 0;
     }
 
     int getRemainingRowsInColumn(int column) {

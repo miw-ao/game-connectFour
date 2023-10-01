@@ -2,8 +2,7 @@ package connectfour.models;
 
 import connectfour.types.Color;
 import connectfour.types.Coordinate;
-import connectfour.views.Message;
-import utils.views.Console;
+import connectfour.types.Error;
 
 class Player {
 
@@ -18,33 +17,19 @@ class Player {
         this.board = board;
     }
 
-    //TODO revisar estos 2 métodos, las líneas comentadas ya que debe haber una forma de llamarlas desde el View en vez del Modelo. Así está mal.
-    public void putToken() {
-        int column;
-        int remainingRowsInColumn;
-        boolean error;
-        do {
-            column = this.inputColumn();
-            remainingRowsInColumn = this.board.getRemainingRowsInColumn(column);
-//            Error.FULL_COLUMN.writeln();
-            error = remainingRowsInColumn == 0;
-        } while (error);
+    void putToken(int column) {
+        int remainingRowsInColumn = this.board.getRemainingRowsInColumn(column);
         Coordinate coordinate = new Coordinate(remainingRowsInColumn - 1, column);
         this.board.putToken(coordinate, this.color);
     }
 
-    int inputColumn() {
-        int column;
-        Console console = Console.getInstance();
-        boolean error;
-        do {
-            column = console.readInt(Message.ENTER_COLUMN_TO_PUT.messagePlayerColor(this.color)) - 1;
-            error = !this.board.isValidColumn(column);
-            if (error) {
-//                Error.WRONG_COLUMN.writeln();
-            }
-        } while (error);
-        return column;
+    Error getInvalidColumn(int column) {
+        if (!this.board.isValidColumn(column)) {
+            return Error.WRONG_COLUMN;
+        } else if (this.board.isFullColumn(column)) {
+            return Error.FULL_COLUMN;
+        }
+        return Error.NULL;
     }
 
     Color getColor() {

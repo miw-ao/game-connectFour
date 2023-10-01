@@ -5,7 +5,7 @@ import utils.views.Console;
 
 class ColorView {
 
-    public void write(Color color) {
+    void write(Color color) {
         String colorName = switch (color.ordinal()) {
             case 0 -> "Y";
             case 1 -> "R";

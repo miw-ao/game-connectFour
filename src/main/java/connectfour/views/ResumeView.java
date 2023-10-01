@@ -3,7 +3,7 @@ package connectfour.views;
 import connectfour.models.Game;
 import utils.views.YesNoDialog;
 
-public class ResumeView extends WithGameView {
+class ResumeView extends WithGameView {
 
     ResumeView(Game game) {
         super(game);

@@ -2,7 +2,7 @@ package connectfour.views;
 
 import connectfour.models.Game;
 
-public class StartView extends WithGameView {
+class StartView extends WithGameView {
 
     StartView(Game game) {
         super(game);

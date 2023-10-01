@@ -2,6 +2,7 @@ package connectfour.models;
 
 import connectfour.types.Color;
 import connectfour.types.Coordinate;
+import connectfour.types.Error;
 
 public class Game {
 
@@ -12,6 +13,14 @@ public class Game {
     public Game() {
         this.board = new Board();
         this.turn = new Turn(this.board);
+    }
+
+    public int getDimensionRowBoard() {
+        return this.board.getDimensionRow();
+    }
+
+    public int getDimensionColumnBoard() {
+        return this.board.getDimensionColumn();
     }
 
     public void reset() {
@@ -39,8 +48,11 @@ public class Game {
         return this.board.getColor(coordinate);
     }
 
-    public void putToken() {
-        this.turn.putToken();
+    public void putToken(int column) {
+        this.turn.putToken(column);
     }
 
+    public Error getInvalidColumn(int column) {
+        return this.turn.getInvalidColumn(column);
+    }
 }

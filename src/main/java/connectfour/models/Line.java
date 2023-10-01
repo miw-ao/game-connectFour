@@ -6,7 +6,7 @@ import utils.models.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Line {
+class Line {
 
     private final Direction direction;
     private final List<Coordinate> coordinates;
@@ -35,7 +35,7 @@ public class Line {
         } while (senseChanges < 2 && coordinatesInLine < Game.CONNECT_FOUR);
     }
 
-    public boolean isMovable(Coordinate lastCoordinate, Board board) {
+    boolean isMovable(Coordinate lastCoordinate, Board board) {
         this.direction.moveInOppositeSense();
         boolean containsLastCoordinate = false;
         boolean areAllCoordinatesMovable = true;
@@ -52,12 +52,12 @@ public class Line {
         return areAllCoordinatesMovable && containsLastCoordinate;
     }
 
-    public void move() {
+    void move() {
         this.direction.moveInOppositeSense();
         this.coordinates.replaceAll(coordinate -> coordinate.nextCoordinate(this.direction.getCurrentSense()));
     }
 
-    public List<Coordinate> getCoordinates() {
+    List<Coordinate> getCoordinates() {
         return this.coordinates;
     }
 
