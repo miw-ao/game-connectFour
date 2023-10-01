@@ -5,12 +5,16 @@ import connectfour.views.View;
 
 public class ConnectFour {
 
-    private Game game;
-    private View view;
+    private final Game game;
+    private final View view;
 
     ConnectFour() {
         this.game = new Game();
         this.view = new View(this.game);
+    }
+
+    public static void main(String[] args) {
+        new ConnectFour().play();
     }
 
     private void play() {
@@ -18,10 +22,6 @@ public class ConnectFour {
             this.view.start();
             this.view.play();
         } while (this.view.resume());
-    }
-
-    public static void main(String[] args) {
-        new ConnectFour().play();
     }
 
 }

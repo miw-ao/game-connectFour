@@ -1,7 +1,7 @@
 package connectfour.views;
 
-import utils.views.Console;
 import connectfour.types.Error;
+import utils.views.Console;
 
 class ErrorView {
 

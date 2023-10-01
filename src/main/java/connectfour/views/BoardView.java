@@ -14,7 +14,7 @@ class BoardView {
         for (int i = 0; i < DIMENSION_ROW; i++) {
             Message.VERTICAL_LINE.write();
             for (int j = 0; j < DIMENSION_COLUMN; j++) {
-                new ColorView().write(game.getColor(new Coordinate(i, j))); /*(new Coordinate(i, j)).write();*/
+                new ColorView().write(game.getColor(new Coordinate(i, j)));
                 Message.VERTICAL_LINE.write();
             }
             Console.getInstance().writeln();

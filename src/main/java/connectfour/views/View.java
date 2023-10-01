@@ -4,9 +4,9 @@ import connectfour.models.Game;
 
 public class View extends WithGameView {
 
-    private StartView startView;
-    private PlayView playView;
-    private ResumeView resumeView;
+    private final StartView startView;
+    private final PlayView playView;
+    private final ResumeView resumeView;
 
     public View(Game game) {
         super(game);

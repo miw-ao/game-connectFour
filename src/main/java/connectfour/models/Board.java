@@ -110,7 +110,7 @@ public class Board {
 
     private List<Line> getMovedLines(List<Line> lines) {
         List<Line> movedLines = new ArrayList<>();
-        for (Line movedLine: lines) {
+        for (Line movedLine : lines) {
             if (movedLine.isMovable(this.lastCoordinate, this)) {
                 movedLine.move();
                 movedLines.add(movedLine);
