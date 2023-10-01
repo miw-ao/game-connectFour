@@ -1,11 +1,12 @@
 package connectfour;
 
 import utils.Console;
+import utils.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+class Board {
 
     public static final int DIMENSION_ROW = 6;
     public static final int DIMENSION_COLUMN = 7;
@@ -111,7 +112,7 @@ public class Board {
 
     private List<Line> getMovedLines(List<Line> lines) {
         List<Line> movedLines = new ArrayList<>();
-        for (Line movedLine: lines) {
+        for (Line movedLine : lines) {
             if (movedLine.isMovable(this.lastCoordinate, this)) {
                 movedLine.move();
                 movedLines.add(movedLine);
@@ -119,7 +120,6 @@ public class Board {
         }
         return movedLines;
     }
-
 
 
     void write() {

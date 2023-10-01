@@ -2,7 +2,7 @@ package connectfour;
 
 import utils.YesNoDialog;
 
-public class ConnectFour {
+class ConnectFour {
 
     public static final int CONNECT_FOUR = 4;
     private final Board board;

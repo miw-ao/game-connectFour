@@ -15,18 +15,11 @@ enum Color {
     }
 
     void write() {
-        String colorName;
-        switch (this) {
-            case YELLOW:
-                colorName = "Y";
-                break;
-            case RED:
-                colorName = "R";
-                break;
-            default:
-                colorName = " ";
-                break;
-        }
+        String colorName = switch (this) {
+            case YELLOW -> "Y";
+            case RED -> "R";
+            default -> " ";
+        };
         Console.getInstance().write(colorName);
     }
 

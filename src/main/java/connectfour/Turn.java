@@ -1,6 +1,6 @@
 package connectfour;
 
-public class Turn {
+class Turn {
 
     static final int NUMBER_PLAYERS = 2;
     private final Board board;

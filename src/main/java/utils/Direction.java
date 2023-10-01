@@ -1,4 +1,4 @@
-package connectfour;
+package utils;
 
 public enum Direction {
     HORIZONTAL(new Sense[]{Sense.WEST, Sense.EAST}),
@@ -7,7 +7,6 @@ public enum Direction {
     INVERSE_DIAGONAL(new Sense[]{Sense.SOUTH_WEST, Sense.NORTH_EAST});
 
     private final Sense[] senses;
-
     private Sense currentSense;
 
     Direction(Sense[] senses) {
@@ -26,4 +25,5 @@ public enum Direction {
     public void moveInOppositeSense() {
         this.currentSense = this.senses[1];
     }
+
 }

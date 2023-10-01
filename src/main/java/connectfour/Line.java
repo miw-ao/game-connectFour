@@ -1,9 +1,11 @@
 package connectfour;
 
+import utils.Direction;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Line {
+class Line {
 
     private final Direction direction;
     private final List<Coordinate> coordinates;

@@ -1,5 +1,7 @@
 package connectfour;
 
+import utils.Sense;
+
 import java.util.Objects;
 
 class Coordinate {
@@ -22,7 +24,6 @@ class Coordinate {
     public Coordinate nextCoordinate(Sense sense) {
         return new Coordinate(this.getRow() + sense.getRowIncrement(), this.getColumn() + sense.getColumnIncrement());
     }
-
 
 
     @Override
