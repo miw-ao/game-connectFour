@@ -46,4 +46,5 @@ class Turn {
     Error getInvalidColumn(int column) {
         return this.getActivePlayer().getInvalidColumn(column);
     }
+
 }

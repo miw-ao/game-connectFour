@@ -4,6 +4,7 @@ import connectfour.types.Color;
 import utils.views.Console;
 
 enum Message {
+
     TITLE("--- CONNECT FOUR ---"),
     HORIZONTAL_LINE("-------------------------------"),
     VERTICAL_LINE(" | "),

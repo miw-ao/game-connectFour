@@ -5,6 +5,7 @@ import utils.models.Sense;
 import java.util.Objects;
 
 public class Coordinate {
+
     private final int row;
     private final int column;
 

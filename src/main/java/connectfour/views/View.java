@@ -27,5 +27,4 @@ public class View extends WithGameView {
         return this.resumeView.interact();
     }
 
-
 }

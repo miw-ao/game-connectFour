@@ -36,16 +36,16 @@ public class Game {
         return this.turn.getActiveColor();
     }
 
+    public Color getColor(Coordinate coordinate) {
+        return this.board.getColor(coordinate);
+    }
+
     public boolean isConnectFour() {
         return this.board.isConnectFour(this.turn.getActiveColor());
     }
 
     public boolean isTied() {
         return this.board.isTied();
-    }
-
-    public Color getColor(Coordinate coordinate) {
-        return this.board.getColor(coordinate);
     }
 
     public void putToken(int column) {
@@ -55,4 +55,5 @@ public class Game {
     public Error getInvalidColumn(int column) {
         return this.turn.getInvalidColumn(column);
     }
+
 }

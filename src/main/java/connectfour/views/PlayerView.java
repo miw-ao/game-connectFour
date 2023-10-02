@@ -4,21 +4,15 @@ import connectfour.models.Game;
 import connectfour.types.Error;
 import utils.views.Console;
 
-class PlayerView {
-
-    private final Game game;
+class PlayerView extends WithGameView {
 
     PlayerView(Game game) {
-        this.game = game;
+        super(game);
     }
 
     void interact() {
         int column = this.inputColumn();
         this.putToken(column);
-    }
-
-    private void putToken(int column) {
-        this.game.putToken(column);
     }
 
     private int inputColumn() {
@@ -37,4 +31,9 @@ class PlayerView {
         new ErrorView().writeln(error);
         return error;
     }
+
+    private void putToken(int column) {
+        this.game.putToken(column);
+    }
+
 }

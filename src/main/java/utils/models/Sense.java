@@ -1,6 +1,7 @@
 package utils.models;
 
 public enum Sense {
+
     NORTH(-1, 0),
     SOUTH(1, 0),
     EAST(0, 1),

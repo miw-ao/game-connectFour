@@ -84,7 +84,7 @@ class Board {
         List<Line> lines = new ArrayList<>();
         Line line;
         for (Direction direction : Direction.values()) {
-            line = new Line(lastCoordinate, direction, this);
+            line = new Line(this.lastCoordinate, direction, this);
             if (line.getCoordinates().size() == Game.CONNECT_FOUR) {
                 lines.add(line);
             }
@@ -108,9 +108,8 @@ class Board {
     }
 
     private boolean checkLineColor(Line line, Color color) {
-        int connectedTokens;
         Coordinate checkingCoordinate;
-        connectedTokens = 0;
+        int connectedTokens = 0;
         for (int i = 0; i < Game.CONNECT_FOUR; i++) {
             checkingCoordinate = line.getCoordinates().get(i);
             if (this.colors[checkingCoordinate.getRow()][checkingCoordinate.getColumn()] == color) {
