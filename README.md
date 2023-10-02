@@ -1,7 +1,6 @@
 # ConnectFour. *viewModel*
 
-> By Oliver Fernández García ([**@oliver-upm**](//github.com/oliver-upm)) & Adrián Castro Vilar ([**@adriancastrovilar
-**](//github.com/adriancastrovilar))
+> By Oliver Fernández García ([**@oliver-upm**](//github.com/oliver-upm)) & Adrián Castro Vilar ([**@adriancastrovilar**](//github.com/adriancastrovilar))
 
 ### Autoevaluación
 
